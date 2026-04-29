@@ -1,29 +1,19 @@
-package burrows.apps.example.template.activity;
-
-import android.os.Bundle;
-import android.widget.Toast;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.android.gms.ads.MobileAds;
-
-import burrows.apps.example.template.R;
-import burrows.apps.example.template.fragment.PlaceholderFragment;
-
-public final class MainActivity extends AppCompatActivity {
-  @Override
-  protected void onCreate(@Nullable Bundle savedInstanceState) {
+@Override
+protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    MobileAds.initialize(this, initializationStatus -> {
-      Toast.makeText(this, "Mobile Ads initialized.", Toast.LENGTH_SHORT).show();
-    });
+    // Linking the XML elements to Java variables
+    final android.widget.EditText myInput = findViewById(R.id.myInput);
+    android.widget.Button myButton = findViewById(R.id.myButton);
 
-    if (savedInstanceState == null) {
-      getSupportFragmentManager().beginTransaction().add(R.id.container, new PlaceholderFragment(),
-        PlaceholderFragment.class.getSimpleName()).commit();
-    }
-  }
+    // Telling the button what to do
+    myButton.setOnClickListener(new android.view.View.OnClickListener() {
+        @Override
+        public void onClick(android.view.View v) {
+            String text = myInput.getText().toString();
+            // This creates a small pop-up message on your tablet
+            android.widget.Toast.makeText(MainActivity.this, "You typed: " + text, android.widget.Toast.LENGTH_LONG).show();
+        }
+    });
 }
